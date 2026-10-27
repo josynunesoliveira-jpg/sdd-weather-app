@@ -100,6 +100,26 @@ Decisões-chave:
 - **Rede isolada** em `services/` — componentes e hooks não conhecem URLs.
 - Sempre tratar **loading**, **erro** e **vazio**.
 
+### Dados mock para desenvolver a UI
+
+Os contratos estão em [src/types/weather.ts](src/types/weather.ts). Para trabalhar
+sem a API, importe o objeto tipado de [src/mocks/weather.ts](src/mocks/weather.ts):
+
+```ts
+import { mockWeatherData } from './mocks/weather';
+
+const { city, current, forecast } = mockWeatherData;
+```
+
+O exemplo considera um módulo dentro de `src/`. O mock contém São Paulo, clima
+atual e exatamente cinco dias consecutivos, de 27 a 31/10/2026. São dados fictícios
+com datas fixas (não acompanham o relógio), temperaturas em Celsius, códigos WMO
+e descrições em pt-BR. A referência de horário é local ao fuso da cidade.
+
+`WeatherData` agrupa os dados para apresentação; não representa o estado de uma
+consulta. Para integração com a API, use `WeatherViewState`, que mantém os estados
+de clima atual e previsão independentes conforme o plano.
+
 ---
 
 ## Stack
